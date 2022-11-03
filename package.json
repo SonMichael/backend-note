@@ -11,7 +11,7 @@
     "build": "rm -rf ./dist/* && tsc",
     "test": "npm run lint:staged",
     "lint:staged": "lint-staged",
-    "lint": "eslint \"{src,apps,libs,test}/**/*.tsx\" --fix && prettier --write \"src/**/*.tsx\"",
+    "lint": "eslint \"{src,apps,libs,test}/**/*.{ts,tsx}\" --fix && prettier --write \"src/**/*.{ts,tsx}\"",
     "tslint": "tslint -c tslint.json 'src/**/*.{ts,tsx}' --fix --format verbose",
     "postinstall": "husky install && link-module-alias"
   },
