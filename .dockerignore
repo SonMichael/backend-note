@@ -1,0 +1,5 @@
+node_modules
+/dockers/data/db
+uploads
+Dockerfile
+docker-compose.yml

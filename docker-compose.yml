@@ -4,47 +4,39 @@ services:
     container_name: backend-note-api
     build:
       context: .
-      dockerfile: dockers/api/Dockerfile
+      dockerfile: Dockerfile
     ports:
       - 3001:3001
-    restart: unless-stopped
-    volumes:
-      - .:/app/
-    working_dir: /app
-    command: yarn watch
     networks:
       - note-db-network
       - note-redis-network
     depends_on:
       - redis
       - mongodb
-    user: "501:1000"
   redis:
-    container_name: note-cache
+    container_name: note-redis
     image: redis:alpine
     ports:
       - '6379:6379'
-    restart: unless-stopped
     volumes:
-      - ./dockers/db/redis:/data
+      - ./dockers/data/db/redis:/data
     networks:
       - note-redis-network
-    user: "501:1000"
+    user: "999:1000"
   mongodb:
     image: mongo:4.2.3-bionic
-    container_name: mongodb
+    container_name: note-mongodb
     ports:
       - 27017:27017
-    restart: unless-stopped
     environment:
       - MONGO_INITDB_DATABASE=note
       - MONGO_INITDB_ROOT_USERNAME=admin
       - MONGO_INITDB_ROOT_PASSWORD=admin
     volumes:
-      - ./dockers/db/mongo:/data/db
+      - ./dockers/data/db/mongo:/data/db
     networks:
       - note-db-network
-    user: "501:1000"
+    user: "999:999"
 networks:
   note-db-network:
     driver: bridge

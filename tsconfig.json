@@ -15,6 +15,7 @@
       "src/@types"
     ],
     "esModuleInterop": true,
+    "moduleResolution": "node",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "plugins": [{
