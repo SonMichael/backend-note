@@ -8,7 +8,7 @@ orbs:
 jobs:
   build-and-push:
     environment:
-      DOCKER_IMAGE: backend/note
+      DOCKER_IMAGE: backend-note
       DOCKER_TAG: latest
     executor: docker/docker
     docker:
