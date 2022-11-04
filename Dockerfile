@@ -22,6 +22,8 @@ COPY --from=deps --chown=nodejs:nodejs /app/node_modules ./node_modules
 COPY --from=builder --chown=nodejs:nodejs /app/dist ./dist
 
 RUN npm i -g pm2
+RUN mkdir /uploads
+RUN chown -R nodejs:nodejs /uploads
 USER nodejs
 RUN npm run postinstall
 
