@@ -27,14 +27,16 @@ services:
   mongodb:
     image: mongo:4.2.3-bionic
     container_name: note-mongodb
+    env_file: .env
     ports:
       - 27017:27017
     environment:
-      - MONGO_INITDB_DATABASE=note
-      - MONGO_INITDB_ROOT_USERNAME=admin
-      - MONGO_INITDB_ROOT_PASSWORD=admin
+      - MONGO_INITDB_DATABASE=${DB_NAME}
+      - MONGO_INITDB_ROOT_USERNAME=${DB_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${DB_PASSWORD}
     volumes:
       - ./dockers/data/db/mongo:/data/db
+      - ./scripts/mongo-init.sh:/docker-entrypoint-initdb.d/mongo-init.sh
     networks:
       - note-db-network
     user: "999:999"

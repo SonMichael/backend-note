@@ -6,7 +6,7 @@
   "author": "",
   "license": "ISC",
   "scripts": {
-    "watch": "ts-node-dev --transpile-only --respawn src/index.ts",
+    "start": "ts-node-dev --transpile-only --respawn src/index.ts",
     "build": "rm -rf ./dist/* && tsc",
     "test": "npm run lint:staged",
     "lint:staged": "lint-staged",
@@ -18,14 +18,23 @@
     "~src": "src"
   },
   "dependencies": {
+    "dotenv": "^8.1.0",
     "koa": "2.8.2",
     "koa-body": "4.1.1",
     "koa-json": "2.0.2",
+    "koa-req-validator": "^1.0.0",
     "koa-router": "7.4.0",
     "koa2-cors": "2.0.6",
-    "dotenv": "^8.1.0"
+    "mongoose": "^6.7.1",
+    "validator": "^13.7.0"
   },
   "devDependencies": {
+    "@types/dotenv": "^6.1.1",
+    "@types/koa": "2.0.52",
+    "@types/koa-json": "2.0.18",
+    "@types/koa-router": "7.0.42",
+    "@types/koa2-cors": "2.0.1",
+    "@types/mongoose": "^5.11.97",
     "@typescript-eslint/eslint-plugin": "^5.40.0",
     "@typescript-eslint/parser": "^5.40.0",
     "eslint": "^8.25.0",
@@ -36,18 +45,13 @@
     "lint-staged": "^13.0.3",
     "prettier": "^2.7.1",
     "sass": "^1.55.0",
+    "ts-node": "^8.10.2",
+    "ts-node-dev": "^1.0.0-pre.44",
     "tslint": "^6.1.3",
     "tslint-config-prettier": "^1.18.0",
     "tslint-plugin-prettier": "^2.3.0",
     "tslint-react": "^5.0.0",
-    "typescript": "^4.8.4",
-    "@types/koa": "2.0.52",
-    "@types/koa-json": "2.0.18",
-    "@types/koa-router": "7.0.42",
-    "@types/koa2-cors": "2.0.1",
-    "ts-node": "^8.10.2",
-    "ts-node-dev": "^1.0.0-pre.44",
-    "@types/dotenv": "^6.1.1"
+    "typescript": "^4.8.4"
   },
   "lint-staged": {
     "*.tsx": [
