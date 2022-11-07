@@ -1,8 +1,7 @@
 import { Context } from 'koa';
-import Config from '~src/config'
+import Config from '~src/config';
 
 export default class Api {
-
   public pass(ctx: Context, data: any, status = 200) {
     const json = {
       data,
@@ -18,10 +17,10 @@ export default class Api {
     code: string,
     message = '',
     data: any = null,
-    status = 500
+    status = 500,
   ) {
     if (!message) {
-      message = (Config.err_msg)[code] || '';
+      message = Config.err_msg[code] || '';
     }
     const json = {
       data: null,

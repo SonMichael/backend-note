@@ -1,8 +1,8 @@
-import Api from '~src/helpers/lib/api'
+import Api from '~src/helpers/lib/api';
 export default abstract class Controller {
-  protected _api:Api
-  
+  protected _api: Api;
+
   constructor() {
-    this._api = new Api()
+    this._api = new Api();
   }
 }

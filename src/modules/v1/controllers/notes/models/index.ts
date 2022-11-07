@@ -1,5 +1,3 @@
-import NotesModelBase from '~src/models/notes'
+import NotesModelBase from '~src/models/notes';
 
-export default class NotesModel extends NotesModelBase {
-
-}
+export default class NotesModel extends NotesModelBase {}

@@ -1,3 +1,1 @@
-export default abstract class NotesService {
-
-}
+export default abstract class NotesService {}

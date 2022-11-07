@@ -54,7 +54,7 @@
     "typescript": "^4.8.4"
   },
   "lint-staged": {
-    "*.tsx": [
+    "*.ts": [
       "npm run lint",
       "npm run tslint",
       "git add ."

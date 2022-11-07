@@ -1,3 +1,1 @@
-export default class LoginValidation {
-
-}
+export default class LoginValidation {}

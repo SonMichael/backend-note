@@ -1,33 +1,30 @@
-import Env from '~src/helpers/env'
-import mongoose from 'mongoose'
-
+import Env from '~src/helpers/env';
+import mongoose from 'mongoose';
 
 export default abstract class ModelBase {
-  private dbHost; 
+  private dbHost;
   private dbPort;
   private dbName;
   private dbUser;
   private dbPass;
-  private dbUri
+  private dbUri;
 
   constructor() {
-    const env = new Env()
-    this.dbHost = env.getValue('DB_HOST')
-    this.dbPort = env.getValue('DB_PORT') 
-    this.dbName = env.getValue('DB_NAME')
-    this.dbUser = env.getValue('DB_USERNAME')
-    this.dbPass = env.getValue('DB_PASSWORD')
-    this.dbUri = `mongodb://${this.dbHost}:${this.dbPort}`
+    const env = new Env();
+    this.dbHost = env.getValue('DB_HOST');
+    this.dbPort = env.getValue('DB_PORT');
+    this.dbName = env.getValue('DB_NAME');
+    this.dbUser = env.getValue('DB_USERNAME');
+    this.dbPass = env.getValue('DB_PASSWORD');
+    this.dbUri = `mongodb://${this.dbHost}:${this.dbPort}`;
   }
 
   public connect() {
-    mongoose.connect(this.dbUri,{
-        "user": this.dbUser,
-        "pass": this.dbPass,
-        "dbName": this.dbName,
-        "autoCreate": true
-      }
-    );
+    mongoose.connect(this.dbUri, {
+      user: this.dbUser,
+      pass: this.dbPass,
+      dbName: this.dbName,
+      autoCreate: true,
+    });
   }
-
 }
