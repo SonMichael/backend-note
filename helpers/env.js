@@ -1,9 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 class Env {
-    static getEnv(name) {
+    getValue(name) {
         try {
-            return typeof process.env[name] !== 'undefined' ? process.env[name] : null;
+            return typeof process.env[name] !== 'undefined'
+                ? process.env[name]
+                : null;
         }
         catch (e) {
             return null;
