@@ -37,5 +37,10 @@ export default class RouterV1 extends Router {
       Validate(getNotesValidation.getCreateNote()),
       notesController.createNote.bind(notesController),
     );
+    this.router.delete(
+      '/notes/:id',
+      Validate(getNotesValidation.getDeleteNote()),
+      notesController.deleteNote.bind(notesController),
+    );
   }
 }

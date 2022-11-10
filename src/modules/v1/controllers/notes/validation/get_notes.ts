@@ -7,7 +7,7 @@ export default class GetNotesValidation {
 
   public getUpdateNote() {
     return {
-      'id:body': ['require', 'isLength', 'Invalid id'],
+      '_id:body': ['require', 'isLength', 'Invalid id'],
       'title:body': ['isLength', 'Invalid title'],
       'text:body': ['isLength', 'Invalid text'],
     };
@@ -17,6 +17,12 @@ export default class GetNotesValidation {
     return {
       'title:body': ['isLength', 'Invalid title'],
       'text:body': ['isLength', 'Invalid text'],
+    };
+  }
+
+  public getDeleteNote() {
+    return {
+      'id:params': ['require', 'isLength', 'Invalid id'],
     };
   }
 }
