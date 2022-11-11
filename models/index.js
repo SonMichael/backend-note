@@ -23,6 +23,7 @@ class ModelBase {
             autoCreate: true,
             authSource: this.dbName,
         });
+        mongoose_1.default.set('debug', true);
     }
 }
 exports.default = ModelBase;

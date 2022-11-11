@@ -40,9 +40,11 @@ class Note extends models_1.default {
             title: { type: String, required: true },
             text: { type: String },
             content: { type: Object },
+            user_id: { type: String, required: true },
             created_at: { type: Date, default: Date.now, required: true },
             updated_at: { type: Date, default: Date.now },
         });
+        NotesSchema.index({ user_id: 1, _id: 1 }, { unique: true });
         return (0, mongoose_1.model)('notes', NotesSchema);
     }
 }
