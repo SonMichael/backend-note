@@ -2,12 +2,12 @@ import Env from '~src/helpers/env';
 import mongoose from 'mongoose';
 
 export default class ModelBase {
-  private dbHost;
-  private dbPort;
-  private dbName;
-  private dbUser;
-  private dbPass;
-  private dbUri;
+  private dbHost: string;
+  private dbPort: string;
+  private dbName: string;
+  private dbUser: string;
+  private dbPass: string;
+  private dbUri: string;
 
   constructor() {
     const env = new Env();

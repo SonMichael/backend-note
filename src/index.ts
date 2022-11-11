@@ -7,12 +7,14 @@ import Env from '~src/helpers/env';
 import Modules from '~src/modules';
 import KoaRouter from 'koa-router';
 import Model from '~src/models';
+import AuthMiddleware from '~src/middleware/auth';
 
+const authMiddleware = new AuthMiddleware();
 const env = new Env();
-
 const modules = new Modules();
 const routes = modules.initRouters();
 const koaRouter = new KoaRouter();
+koaRouter.use(authMiddleware.verify());
 koaRouter.use(routes.v1);
 koaRouter.use(routes.v2);
 const model = new Model();

@@ -2,6 +2,8 @@ import KoaRouter from 'koa-router';
 import Validate from 'koa-req-validator';
 import GetNotesValidation from '~src/modules/v1/controllers/notes/validation/get_notes';
 import NotesController from '~src/modules/v1/controllers/notes';
+import AuthController from '~src/modules/v1/controllers/auth';
+import LoginValidation from '~src/modules/v1/controllers/auth/validation/login';
 import Router from '~src/modules/router';
 
 export default class RouterV1 extends Router {
@@ -14,8 +16,19 @@ export default class RouterV1 extends Router {
   }
 
   public initRouter() {
+    this.initAuthRouter();
     this.initNoteRouter();
     return this.router;
+  }
+
+  private initAuthRouter() {
+    const validation = new LoginValidation();
+    const controller = new AuthController();
+    this.router.post(
+      '/login',
+      Validate(validation.getLogin()),
+      controller.login.bind(controller),
+    );
   }
 
   private initNoteRouter() {

@@ -1,11 +1,16 @@
-import { Schema, model, Model } from 'mongoose';
+import mongoose, { Schema, model, Model } from 'mongoose';
 import ModelBase from '~src/models';
+import { SchemaInterface } from '~src/models/Ischema';
 
-export default class Note extends ModelBase {
-  private _collection: Model<any>;
+export default class Note extends ModelBase implements SchemaInterface {
+  public getCollection(): Model<any> {
+    if (mongoose.models.notes) {
+      return mongoose.models.notes;
+    }
+    return this.initSchema();
+  }
 
-  constructor() {
-    super();
+  private initSchema() {
     const NotesSchema = new Schema({
       title: { type: String, required: true },
       text: { type: String },
@@ -13,10 +18,6 @@ export default class Note extends ModelBase {
       created_at: { type: Date, default: Date.now, required: true },
       updated_at: { type: Date, default: Date.now },
     });
-    this._collection = model('notes', NotesSchema);
-  }
-
-  public getCollection() {
-    return this._collection;
+    return model('notes', NotesSchema);
   }
 }
