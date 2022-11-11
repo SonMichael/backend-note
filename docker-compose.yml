@@ -11,6 +11,7 @@ services:
     networks:
       - note-db-network
       - note-redis-network
+      - note-backend-network
     depends_on:
       - redis
       - mongodb
@@ -44,4 +45,6 @@ networks:
   note-db-network:
     driver: bridge
   note-redis-network:
+    driver: bridge
+  note-backend-network:
     driver: bridge

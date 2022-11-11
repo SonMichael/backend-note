@@ -2,4 +2,3 @@ node_modules
 /dockers/data/db
 Dockerfile
 docker-compose.yml
-.env

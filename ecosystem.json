@@ -6,9 +6,9 @@
     "cwd": "./",
     "args": "run start",
     "time": true,
-    "instances": "max",
-    "exec_mode": "cluster",
-    "autorestart": true,
+    "instances": "1",
+    "exec_mode": "fork",
+    "autorestart": false,
     "watch": false,
     "max_memory_restart": "1G",
     "env": {
