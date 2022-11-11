@@ -28,23 +28,20 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importStar(require("mongoose"));
 const models_1 = __importDefault(require("~src/models"));
-class Note extends models_1.default {
+class UserModel extends models_1.default {
     getCollection() {
-        if (mongoose_1.default.models.notes) {
-            return mongoose_1.default.models.notes;
+        if (mongoose_1.default.models.users) {
+            return mongoose_1.default.models.users;
         }
         return this.initSchema();
     }
     initSchema() {
-        const NotesSchema = new mongoose_1.Schema({
-            title: { type: String, required: true },
-            text: { type: String },
-            content: { type: Object },
-            created_at: { type: Date, default: Date.now, required: true },
-            updated_at: { type: Date, default: Date.now },
+        const schema = new mongoose_1.Schema({
+            user_name: { type: String, required: true },
+            password: { type: String, required: true },
         });
-        return (0, mongoose_1.model)('notes', NotesSchema);
+        return (0, mongoose_1.model)('users', schema);
     }
 }
-exports.default = Note;
-//# sourceMappingURL=notes.js.map
+exports.default = UserModel;
+//# sourceMappingURL=users.js.map
