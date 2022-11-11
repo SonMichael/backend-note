@@ -27,5 +27,6 @@ export default class ModelBase {
       autoCreate: true,
       authSource: this.dbName,
     });
+    mongoose.set('debug', true);
   }
 }

@@ -15,9 +15,11 @@ export default class Note extends ModelBase implements SchemaInterface {
       title: { type: String, required: true },
       text: { type: String },
       content: { type: Object },
+      user_id: { type: String, required: true },
       created_at: { type: Date, default: Date.now, required: true },
       updated_at: { type: Date, default: Date.now },
     });
+    NotesSchema.index({ user_id: 1, _id: 1 }, { unique: true });
     return model('notes', NotesSchema);
   }
 }
