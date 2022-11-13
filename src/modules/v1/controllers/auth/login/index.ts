@@ -1,6 +1,6 @@
 import { Context } from 'koa';
 import ControllerV1 from '~src/modules/v1/controllers';
-import UserModel from '~src/modules/v1/controllers/auth/models';
+import UserModel from '~src/modules/v1/controllers/auth/login/models';
 import Config from '~src/config';
 import Moment from 'moment';
 import JwtToken from '~src/helpers/lib/jwt';
@@ -17,19 +17,22 @@ export default class AuthController extends ControllerV1 {
 
   public async login(ctx: Context) {
     const { user_name: userName, password } = ctx.request.body;
-    const target = await this._usersModel
-      .getCollection()
-      .findOne({ user_name: userName, password })
-      .lean();
+    try {
+      const target = await this._usersModel
+        .getCollection()
+        .findOne({ user_name: userName, password })
+        .lean();
+      if (!target) {
+        return this._api.fail(ctx, Config.codes.ERR_00002, '', 401);
+      }
 
-    if (!target) {
+      const data = {
+        token: this.generateJwtToken(target),
+      };
+      return this._api.pass(ctx, data);
+    } catch (err: any) {
       return this._api.fail(ctx, Config.codes.ERR_00002, '', 401);
     }
-
-    const data = {
-      token: this.generateJwtToken(target),
-    };
-    return this._api.pass(ctx, data);
   }
 
   private generateJwtToken(info: { user_name: string; _id: string }) {

@@ -12,7 +12,7 @@ export default class UserModel extends ModelBase implements SchemaInterface {
 
   private initSchema() {
     const schema = new Schema({
-      user_name: { type: String, required: true },
+      user_name: { type: String, required: true, unique: true },
       password: { type: String, required: true },
     });
 

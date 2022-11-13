@@ -4,7 +4,7 @@ import ConfigConstant from '~src/config';
 import ExcludeLoginConstant from '~src/config/exclude_login';
 import Api from '~src/helpers/lib/api';
 import JwtToken from '~src/helpers/lib/jwt';
-import UserModel from '~src/modules/v1/controllers/auth/models';
+import UserModel from '~src/modules/v1/controllers/auth/login/models';
 import _ from 'lodash';
 
 type UserInfoType = {
