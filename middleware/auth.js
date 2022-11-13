@@ -8,7 +8,7 @@ const config_1 = __importDefault(require("~src/config"));
 const exclude_login_1 = __importDefault(require("~src/config/exclude_login"));
 const api_1 = __importDefault(require("~src/helpers/lib/api"));
 const jwt_1 = __importDefault(require("~src/helpers/lib/jwt"));
-const models_1 = __importDefault(require("~src/modules/v1/controllers/auth/models"));
+const models_1 = __importDefault(require("~src/modules/v1/controllers/auth/login/models"));
 const lodash_1 = __importDefault(require("lodash"));
 class Auth {
     constructor() {

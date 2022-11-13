@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const controllers_1 = __importDefault(require("~src/modules/v1/controllers"));
-const models_1 = __importDefault(require("~src/modules/v1/controllers/auth/models"));
+const models_1 = __importDefault(require("~src/modules/v1/controllers/auth/login/models"));
 const config_1 = __importDefault(require("~src/config"));
 const moment_1 = __importDefault(require("moment"));
 const jwt_1 = __importDefault(require("~src/helpers/lib/jwt"));
@@ -16,17 +16,22 @@ class AuthController extends controllers_1.default {
     }
     async login(ctx) {
         const { user_name: userName, password } = ctx.request.body;
-        const target = await this._usersModel
-            .getCollection()
-            .findOne({ user_name: userName, password })
-            .lean();
-        if (!target) {
+        try {
+            const target = await this._usersModel
+                .getCollection()
+                .findOne({ user_name: userName, password })
+                .lean();
+            if (!target) {
+                return this._api.fail(ctx, config_1.default.codes.ERR_00002, '', 401);
+            }
+            const data = {
+                token: this.generateJwtToken(target),
+            };
+            return this._api.pass(ctx, data);
+        }
+        catch (err) {
             return this._api.fail(ctx, config_1.default.codes.ERR_00002, '', 401);
         }
-        const data = {
-            token: this.generateJwtToken(target),
-        };
-        return this._api.pass(ctx, data);
     }
     generateJwtToken(info) {
         const { _id, user_name } = info;

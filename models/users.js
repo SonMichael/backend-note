@@ -37,7 +37,7 @@ class UserModel extends models_1.default {
     }
     initSchema() {
         const schema = new mongoose_1.Schema({
-            user_name: { type: String, required: true },
+            user_name: { type: String, required: true, unique: true },
             password: { type: String, required: true },
         });
         return (0, mongoose_1.model)('users', schema);

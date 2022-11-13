@@ -7,9 +7,11 @@ const koa_router_1 = __importDefault(require("koa-router"));
 const koa_req_validator_1 = __importDefault(require("koa-req-validator"));
 const get_notes_1 = __importDefault(require("~src/modules/v1/controllers/notes/validation/get_notes"));
 const notes_1 = __importDefault(require("~src/modules/v1/controllers/notes"));
-const auth_1 = __importDefault(require("~src/modules/v1/controllers/auth"));
-const login_1 = __importDefault(require("~src/modules/v1/controllers/auth/validation/login"));
+const login_1 = __importDefault(require("~src/modules/v1/controllers/auth/login"));
+const login_2 = __importDefault(require("~src/modules/v1/controllers/auth/login/validation/login"));
 const router_1 = __importDefault(require("~src/modules/router"));
+const register_1 = __importDefault(require("~src/modules/v1/controllers/auth/register/validation/register"));
+const register_2 = __importDefault(require("~src/modules/v1/controllers/auth/register"));
 class RouterV1 extends router_1.default {
     constructor() {
         super();
@@ -22,9 +24,12 @@ class RouterV1 extends router_1.default {
         return this.router;
     }
     initAuthRouter() {
-        const validation = new login_1.default();
-        const controller = new auth_1.default();
+        const validation = new login_2.default();
+        const controller = new login_1.default();
         this.router.post('/login', (0, koa_req_validator_1.default)(validation.getLogin()), controller.login.bind(controller));
+        const registerValidation = new register_1.default();
+        const registerController = new register_2.default();
+        this.router.post('/register', (0, koa_req_validator_1.default)(registerValidation.getRegister()), registerController.register.bind(registerController));
     }
     initNoteRouter() {
         const getNotesValidation = new get_notes_1.default();
