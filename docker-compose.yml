@@ -2,51 +2,49 @@ version: '3.7'
 services:
   api:
     container_name: backend-note-api
-    build:
-      context: .
-      dockerfile: dockers/api/Dockerfile
+    image: lehuuson/backend-note:latest
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile
     ports:
       - 3001:3001
-    restart: unless-stopped
-    volumes:
-      - .:/app/
-    working_dir: /app
-    command: yarn watch
     networks:
       - note-db-network
       - note-redis-network
+      - note-backend-network
     depends_on:
       - redis
       - mongodb
-    user: "501:1000"
   redis:
-    container_name: note-cache
+    container_name: note-redis
     image: redis:alpine
     ports:
       - '6379:6379'
-    restart: unless-stopped
     volumes:
-      - ./dockers/db/redis:/data
+      - ./dockers/data/db/redis:/data
     networks:
       - note-redis-network
-    user: "501:1000"
+    user: "999:1000"
   mongodb:
     image: mongo:4.2.3-bionic
-    container_name: mongodb
+    container_name: note-mongodb
+    env_file: .env
     ports:
       - 27017:27017
-    restart: unless-stopped
     environment:
-      - MONGO_INITDB_DATABASE=note
-      - MONGO_INITDB_ROOT_USERNAME=admin
-      - MONGO_INITDB_ROOT_PASSWORD=admin
+      - MONGO_INITDB_DATABASE=${DB_NAME}
+      - MONGO_INITDB_ROOT_USERNAME=${DB_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${DB_PASSWORD}
     volumes:
-      - ./dockers/db/mongo:/data/db
+      - ./dockers/data/db/mongo:/data/db
+      - ./scripts/mongo-init.sh:/docker-entrypoint-initdb.d/mongo-init.sh
     networks:
       - note-db-network
-    user: "501:1000"
+    user: "999:999"
 networks:
   note-db-network:
     driver: bridge
   note-redis-network:
+    driver: bridge
+  note-backend-network:
     driver: bridge

@@ -5,13 +5,12 @@
   "main": "index.js",
   "author": "",
   "license": "ISC",
-  "type": "module",
   "scripts": {
-    "watch": "ts-node-dev --transpile-only --respawn src/index.ts",
-    "build": "rm -rf ./dist/* && tsc && cp -r ./src/view/ ./dist/",
+    "start": "ts-node-dev --transpile-only --respawn src/index.ts",
+    "build": "rm -rf ./dist/* && tsc",
     "test": "npm run lint:staged",
     "lint:staged": "lint-staged",
-    "lint": "eslint \"{src,apps,libs,test}/**/*.tsx\" --fix && prettier --write \"src/**/*.tsx\"",
+    "lint": "eslint \"{src,apps,libs,test}/**/*.{ts,tsx}\" --fix && prettier --write \"src/**/*.{ts,tsx}\"",
     "tslint": "tslint -c tslint.json 'src/**/*.{ts,tsx}' --fix --format verbose",
     "postinstall": "husky install && link-module-alias"
   },
@@ -19,14 +18,27 @@
     "~src": "src"
   },
   "dependencies": {
+    "dotenv": "^8.1.0",
+    "jwt-simple": "^0.5.6",
     "koa": "2.8.2",
     "koa-body": "4.1.1",
     "koa-json": "2.0.2",
+    "koa-req-validator": "^1.0.0",
     "koa-router": "7.4.0",
     "koa2-cors": "2.0.6",
-    "dotenv": "^8.1.0"
+    "lodash": "^4.17.21",
+    "moment": "^2.29.4",
+    "mongoose": "^6.7.1",
+    "validator": "^13.7.0"
   },
   "devDependencies": {
+    "@types/dotenv": "^6.1.1",
+    "@types/koa": "2.0.52",
+    "@types/koa-json": "2.0.18",
+    "@types/koa-router": "7.0.42",
+    "@types/koa2-cors": "2.0.1",
+    "@types/lodash": "^4.14.188",
+    "@types/mongoose": "^5.11.97",
     "@typescript-eslint/eslint-plugin": "^5.40.0",
     "@typescript-eslint/parser": "^5.40.0",
     "eslint": "^8.25.0",
@@ -37,21 +49,16 @@
     "lint-staged": "^13.0.3",
     "prettier": "^2.7.1",
     "sass": "^1.55.0",
+    "ts-node": "^8.10.2",
+    "ts-node-dev": "^1.0.0-pre.44",
     "tslint": "^6.1.3",
     "tslint-config-prettier": "^1.18.0",
     "tslint-plugin-prettier": "^2.3.0",
     "tslint-react": "^5.0.0",
-    "typescript": "^4.8.4",
-    "@types/koa": "2.0.49",
-    "@types/koa-json": "2.0.18",
-    "@types/koa-router": "7.0.42",
-    "@types/koa2-cors": "2.0.1",
-    "ts-node": "^8.10.2",
-    "ts-node-dev": "^1.0.0-pre.44",
-    "@types/dotenv": "^6.1.1"
+    "typescript": "^4.8.4"
   },
   "lint-staged": {
-    "*.tsx": [
+    "*.ts": [
       "npm run lint",
       "npm run tslint",
       "git add ."

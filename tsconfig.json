@@ -15,8 +15,10 @@
       "src/@types"
     ],
     "esModuleInterop": true,
+    "moduleResolution": "node",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
+    "noImplicitAny": false,
     "plugins": [{
       "name": "typescript-tslint-plugin",
       "alwaysShowRuleFailuresAsWarnings": false,
